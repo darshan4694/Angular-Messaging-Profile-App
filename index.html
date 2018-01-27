@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    <!-- <link rel="stylesheet" href="https://bootswatch.com/3/flatly/bootstrap.min.css"> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="https://code.angularjs.org/1.5.5/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.5.5/angular-route.js"></script>
+    <title>Document</title>
+    <style>
+        /* .navbar-custom {
+            color: #FFFFFF;
+            background-color: #428bca;
+        } */
+
+        .messages {
+            border: solid 1px black;
+            /* width: 50%;
+            height: 100%; */
+            height: 600px;
+            overflow-y: scroll;
+        }
+
+        .send-message {
+            border: solid 1px black;
+            /* width: 50%;
+            height: 100%; */
+        }
+
+        .show-message-details {
+            border: solid 1px black;
+            height: 600px;
+            overflow-y: scroll;
+        }
+
+        .container {
+            font-size: 150%;
+        }
+
+        .important-class {
+            color: gold;
+        }
+
+        .not-important-class {
+            color: black;
+        }
+
+        #msg-list li:hover {
+            background-color: lightblue;
+        }
+
+        .msg-selected {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container" ng-app="myApp" ng-controller="mainController">
+
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-inverse">
+            <!-- <div class="container-fluid"> -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/">My App</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <div class="nav navbar-nav navbar-right">
+                    <li ng-if="isLoggedIn">
+                        <a href="#/">Hi {{uname}}!</a>
+                    </li>
+                    <li ng-if="!isLoggedIn">
+                        <a href="#/signin">Sign in</a>
+                    </li>
+                    <li ng-if="isLoggedIn">
+                        <a href="#/profile">Profile</a>
+                    </li>
+                    <li ng-if="isLoggedIn">
+                        <a href="#/messages">Message</a>
+                    </li>
+                    <li ng-if="isLoggedIn">
+                        <a href="#/signin" ng-click="signOut()">Sign out</a>
+                    </li>
+                    <li ng-if="!isLoggedIn">
+                        <a href="#/register">Register</a>
+                    </li>
+                </div>
+            </div>
+            <!-- </div> -->
+        </nav>
+        <div ng-view=""></div>
+
+    </div>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

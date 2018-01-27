@@ -1,0 +1,6 @@
+<h1 class="alert alert-success">Welcome to {{companyName}}</h1>
+
+<h4 ng-repeat="(key, value) in user">
+    <span ng-if="key!='messages'">{{key }} : {{ value }}</span>
+    <span ng-if="key=='messages'">Hello</span>
+</h4>

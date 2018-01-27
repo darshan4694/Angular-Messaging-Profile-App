@@ -1,0 +1,180 @@
+<!-- <div class="row">
+    <div class="col-md-6  messages">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="message in user.messages">{{message}}</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+            <li class="list-group-item">Hello</li>
+        </ul>
+    </div>
+    <div class="col-md-6 send-message">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Send Message</h2>
+            </div>
+            <div class="panel-body">
+                <form role="form" name="messageForm" ng-submit="sendMessage()">
+                    <div class="form-group">
+                        <h4>
+                            <label for="username">To:</label>
+                        </h4>
+                        <input type="text" name="username" ng-model="newMessage.username" id="username" class="form-control" placeholder="Username"
+                            required>
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="uname in usernames | filter:newMessage.username">{{uname}}</li>
+                        </ul>
+                        <p ng-if="messageForm.username.$touched && messageForm.username.$invalid">The name is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <h4>
+                            <label for="title">Title:</label>
+                        </h4>
+                        <input type="text" name="title" ng-model="newMessage.title" id="title" class="form-control" placeholder="Title of the message..."
+                            required>
+                        <p ng-if="messageForm.title.$touched && messageForm.title.$invalid">The title is required.</p>
+                    </div>
+                    <div class="form-group">
+                        <h4>
+                            <label for="message">Message:</label>
+                        </h4>
+                        <textarea type="text" name="message" ng-model="newMessage.message" id="message" class="form-control" placeholder="Enter you message here..."
+                            required></textarea>
+                    </div>
+                    <button type="submit" ng-disabled="messageForm.$invalid" class="btn btn-primary btn-block">Send&nbsp;
+                        <i class='fa fa-paper-plane' aria-hidden='true'></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div class="row">
+    <!-- <div class="col-md-8 col-md-offset-2"> -->
+    <div class="col-md-2"></div>
+    <button class="btn btn-info col-md-4" ng-click="createMessagesFlag = true">Create Message</button>
+    <!-- </div> -->
+    <!-- <div class="col-md-4"> -->
+    <button class="btn btn-info col-md-4" ng-click="createMessagesFlag = false">Show Messages</button>
+    <!-- </div> -->
+</div>
+</br>
+<div class="col-md-12 send-message" ng-if="createMessagesFlag">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h2 class="panel-title">Send Message</h2>
+        </div>
+        <div class="panel-body">
+            <form role="form" name="messageForm" ng-submit="sendMessage()">
+                <div class="form-group">
+                    <h4>
+                        <label for="username">To:</label>
+                    </h4>
+                    <!-- <input type="text" name="username" ng-model="newMessage.username" id="username" class="form-control" placeholder="Username"
+                        required>
+                    <p ng-if="messageForm.username.$touched && messageForm.username.$invalid">The name is required.</p> -->
+                    <select name="username" ng-model="newMessage.username" ng-options="x for x in usernames"></select>
+                    <h1>{{newMessage.username}}</h1>
+
+                </div>
+                <div class="form-group">
+                    <h4>
+                        <label for="title">Title:</label>
+                    </h4>
+                    <input type="text" name="title" ng-model="newMessage.title" id="title" class="form-control" placeholder="Title of the message..."
+                        required>
+                    <p ng-if="messageForm.title.$touched && messageForm.title.$invalid">The title is required.</p>
+                </div>
+                <div class="form-group">
+                    <h4>
+                        <label for="message">Message:</label>
+                    </h4>
+                    <textarea type="text" name="message" ng-model="newMessage.messageContent" id="message" class="form-control" placeholder="Enter you message here..."
+                        required></textarea>
+                </div>
+                <!-- <input type="submit" value="Send" ng-disabled="messageForm.$invalid" class="btn btn-primary btn-block"></span> -->
+                <button type="submit" ng-disabled="messageForm.$invalid" class="btn btn-primary btn-block">Send&nbsp;
+                    <i class='fa fa-paper-plane' aria-hidden='true'></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="!createMessagesFlag">
+    <div class="col-md-4 messages" style="padding: 0px; margin:0px">
+        <ul class="list-group" id="msg-list">
+            <li class="list-group-item" ng-repeat="message in myMessages track by $index" 
+            ng-click="showMessageDetails($index)">
+                <p>
+                    <strong>From: </strong>{{message.sender}}
+                </p>
+                <p style="float: right;">
+                    <important></important>
+                </p>
+                <p>
+                    <strong>Title: </strong>{{message.title}}
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-8 show-message-details">
+        <div ng-if="showMessageDetailsFlag">
+            <p>
+                <strong style="color:#2AABD2;">Title:</strong>
+            </p>
+            <p>{{showMessageDetailsObj.title}}</p>
+            <hr>
+            <p>
+                <strong style="color:#2AABD2;">From:</strong>
+            </p>
+            <p>{{showMessageDetailsObj.sender}}</p>
+            <hr>
+            <p>
+                <strong style="color:#2AABD2;">To:</strong>
+            </p>
+            <p>{{showMessageDetailsObj.recipient}}</p>
+            <hr>
+            <p>
+                <strong style="color:#2AABD2;">Time:</strong>
+            </p>
+            <p>{{showMessageDetailsObj.created_at}}</p>
+            <hr>
+            <p>
+                <strong style="color:#2AABD2;">Content:</strong>
+            </p>
+            <p>{{showMessageDetailsObj.description}}</p>
+            <p>{{showMessageDetailsObj.thread}}</p>
+            <hr>
+            <div ng-repeat="t in showMessageDetailsObj.thread track by $index">
+                <p></p>{{t}}</p>
+                <p>
+                    <small>From:</small>
+                </p>
+                <p>{{t.sender}}</p>
+                <p>
+                    <small>To:</small>
+                </p>
+                <p>{{t.recipient}}</p>
+                <p>
+                    <small>Time:</small>
+                </p>
+                <p>{{t.create_at}}</p>
+                <p>
+                    <small>Content:</small>
+                </p>
+                <p>{{t.description}}</p>
+            </div>
+            <textarea type="text" name="replyArea" class="form-control" ng-model="showMessageDetailsObj.replyContent" style="min-width: 100%; min-height:200px;"
+                required></textarea>
+            <p>
+                <button class="btn btn-info btn-block" ng-click="replyMsg(showMessageDetailsObj)">Reply</button>
+            </p>
+        </div>
+    </div>
+</div>
